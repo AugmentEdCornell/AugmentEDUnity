@@ -6,14 +6,9 @@ using Cinemachine;
 public class CameraSystem : MonoBehaviour {
 
         [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
-        [SerializeField] private bool useEdgeScrolling = false;
         [SerializeField] private bool useDragPan = false;
         [SerializeField] private float fieldOfViewMax = 50;
         [SerializeField] private float fieldOfViewMin = 10;
-        [SerializeField] private float followOffsetMin = 5f;
-        [SerializeField] private float followOffsetMax = 50f;
-        [SerializeField] private float followOffsetMinY = 10f;
-        [SerializeField] private float followOffsetMaxY = 50f;
 
         private bool dragPanMoveActive;
         private Vector2 lastMousePosition;
@@ -27,10 +22,6 @@ public class CameraSystem : MonoBehaviour {
 
         private void Update() {
             HandleCameraMovement();
-
-            if (useEdgeScrolling) {
-                HandleCameraMovementEdgeScrolling();
-            }
 
             if (useDragPan) {
                 HandleCameraMovementDragPan();
@@ -50,38 +41,15 @@ public class CameraSystem : MonoBehaviour {
             if (Input.GetKey(KeyCode.S)) inputDir.z = -1f;
             if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
             if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
-            if (Input.GetKey(KeyCode.UpArrow)) inputDir.y = -1f;
-            if (Input.GetKey(KeyCode.DownArrow)) inputDir.y = +1f;
+            // if (Input.GetKey(KeyCode.UpArrow)) inputDir.y = -1f;
+            // if (Input.GetKey(KeyCode.DownArrow)) inputDir.y = +1f;
 
-            Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x + transform.up * inputDir.y;
-
-            float moveSpeed = 50f;
-            transform.position += moveDir * moveSpeed * Time.deltaTime;
-        }
-
-        private void HandleCameraMovementEdgeScrolling() {
-            Vector3 inputDir = new Vector3(0, 0, 0);
-
-            int edgeScrollSize = 20;
-
-            if (Input.mousePosition.x < edgeScrollSize) {
-                inputDir.x = -1f;
-            }
-            if (Input.mousePosition.y < edgeScrollSize) {
-                inputDir.z = -1f;
-            }
-            if (Input.mousePosition.x > Screen.width - edgeScrollSize) {
-                inputDir.x = +1f;
-            }
-            if (Input.mousePosition.y > Screen.height - edgeScrollSize) {
-                inputDir.z = +1f;
-            }
-
-            Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x;
+            Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x; // + transform.up * inputDir.y;
 
             float moveSpeed = 50f;
             transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
+
 
         private void HandleCameraMovementDragPan() {
             Vector3 inputDir = new Vector3(0, 0, 0);
@@ -145,13 +113,7 @@ public class CameraSystem : MonoBehaviour {
                 followOffset += zoomDir * zoomAmount;
             }
 
-            if (followOffset.magnitude < followOffsetMin) {
-                followOffset = zoomDir * followOffsetMin;
-            }
 
-            if (followOffset.magnitude > followOffsetMax) {
-                followOffset = zoomDir * followOffsetMax;
-            }
 
             float zoomSpeed = 10f;
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
@@ -167,7 +129,6 @@ public class CameraSystem : MonoBehaviour {
                 followOffset.y += zoomAmount;
             }
 
-            followOffset.y = Mathf.Clamp(followOffset.y, followOffsetMinY, followOffsetMaxY);
 
             float zoomSpeed = 10f;
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset =
