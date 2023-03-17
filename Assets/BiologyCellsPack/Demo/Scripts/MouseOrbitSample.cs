@@ -30,7 +30,7 @@ public class MouseOrbitSample : MonoBehaviour
     float time;
     float tempDistance;
 
-
+    
 
     void Start()
     {
@@ -44,6 +44,11 @@ public class MouseOrbitSample : MonoBehaviour
 
     public void RefreshCamera(Transform target,float distance,float speed)
     {
+        // Added by Adam
+        // Resets all clickable objects when clicked. This can hide all active messages in scene
+        ResetAllClickableObjects();
+        // End
+        
         cameraSpeed = speed;
         newDirection = target.position ;
         newCameraPosition = target.position + target.forward * distance;
@@ -58,6 +63,44 @@ public class MouseOrbitSample : MonoBehaviour
             isRefreshTarget = true;
         }
     }
+    
+    // Added by Adam
+    
+    // Moves the camera but keeps the facing direction
+    public void RefreshCameraFixedRotation(Transform target,float distance,float speed)
+    {
+        // Added by Adam
+        // Resets all clickable objects when clicked. This can hide all active messages in scene
+        ResetAllClickableObjects();
+        // End
+        
+        cameraSpeed = speed;
+        newDirection = target.position;
+        newCameraPosition = target.position - transform.forward * distance;
+        Distance = distance;
+        tempPoint = new Vector3( transform.position.x,transform.position.y,transform.position.z);
+        tempRotation = transform.rotation;
+       
+        time = Time.time;
+        tempDistance = Vector3.Distance(tempPoint, newCameraPosition);
+        if (tempDistance > 0.01f)
+        {
+            isRefreshTarget = true;
+        }
+    }
+    
+    // resets all clickable objects
+    private void ResetAllClickableObjects()
+    {
+        ClickableObject[] objects = FindObjectsOfType(typeof(ClickableObject)) as ClickableObject[];
+
+        foreach (ClickableObject obj in objects)
+        {
+            obj.Reset();
+        }
+    }
+    
+    // End
 
 
     private void LateUpdate()
@@ -100,7 +143,13 @@ public class MouseOrbitSample : MonoBehaviour
                 refreshPointPer = distCovered / tempDistance;
 
                 transform.position = Vector3.Lerp(tempPoint, newCameraPosition, refreshPointPer);
+                // edited by adam to fix rotation
+                //if (!m_fixRotation)
+                //{
+                //    transform.rotation = Quaternion.Slerp(tempRotation, Quaternion.LookRotation(newDirection - transform.position), refreshPointPer);
+                //}
                 transform.rotation = Quaternion.Slerp(tempRotation, Quaternion.LookRotation(newDirection - transform.position), refreshPointPer);
+                
 
                 if (refreshPointPer >= 0.999f)
                 {
