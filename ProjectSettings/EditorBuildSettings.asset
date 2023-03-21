@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ReactToUnity.unity
+    guid: bf8fc3bbbad95489f8ba0f317589a60e
   m_configObjects: {}
