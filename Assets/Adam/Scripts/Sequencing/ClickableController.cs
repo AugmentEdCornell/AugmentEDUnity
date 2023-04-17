@@ -16,6 +16,6 @@ public class ClickableController : MonoBehaviour
     public void DisableClickOrbit()
     {
         allowClick = false;
-        m_MouseOrbit.mouseRotateActive = false;
+        //m_MouseOrbit.mouseRotateActive = false;
     }
 }

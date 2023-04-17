@@ -45,6 +45,7 @@ public class Quiz : MonoBehaviour
     public void RemoveAnswer()
     {
         m_StudentAns[m_QuizIdx] = 0;
+        m_StudentAnsBool[m_QuizIdx] = false;
     }
 
     private void Start()
