@@ -114,7 +114,7 @@ public class Outline : MonoBehaviour {
   }
 
   void OnValidate() {
-    Debug.Log("OnValidateCalled");
+    //Debug.Log("OnValidateCalled");
 
 
     // Update material properties
@@ -141,7 +141,7 @@ public class Outline : MonoBehaviour {
   }
 
   void OnDisable() {
-    Debug.Log("OnDisableCalled");
+    //Debug.Log("OnDisableCalled");
 
     foreach (var renderer in renderers) {
 

@@ -39,7 +39,7 @@ public class MouseOrbitSample : MonoBehaviour
         xRotation = 0;
         yRotation = 0;
 
-        RefreshCamera(Target, 2, 3);
+        RefreshCamera(Target, Distance, 3);
     }
 
     public void RefreshCamera(Transform target,float distance,float speed)
