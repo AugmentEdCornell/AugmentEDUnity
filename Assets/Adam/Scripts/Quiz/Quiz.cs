@@ -8,6 +8,12 @@ using Random = UnityEngine.Random;
 
 public class Quiz : MonoBehaviour
 {
+    [SerializeField] private GameObject m_SubmitButton;
+    [SerializeField] private GameObject m_ResultScreen;
+    [SerializeField] private GameObject m_QuizScreen;
+    [SerializeField] private TextMeshProUGUI m_TextScore;
+
+    
     [Serializable]
     public class QuizQuestion
     {
@@ -34,7 +40,7 @@ public class Quiz : MonoBehaviour
 
     [SerializeField] private int[] m_StudentAns;
     [SerializeField] private bool[] m_StudentAnsBool;
-
+    
     public void Answer(int ans)
     {
         m_StudentAns[m_QuizIdx] = ans;
@@ -56,6 +62,8 @@ public class Quiz : MonoBehaviour
         m_StudentAns = new int[m_QuizQuestions.Length];
         m_StudentAnsBool = new bool[m_QuizQuestions.Length];
         UncheckAll();
+        m_ResultScreen.SetActive(false);
+        m_SubmitButton.SetActive(false);
     }
 
     public void UncheckAll()
@@ -74,6 +82,12 @@ public class Quiz : MonoBehaviour
             m_QuizIdx++;
             DisplayQuestion(m_QuizIdx);
         }
+        // show submit button if is last question
+        m_SubmitButton.SetActive(false);
+        if (m_QuizIdx + 1 == m_QuizQuestions.Length)
+        {
+            m_SubmitButton.SetActive(true);
+        }
     }
     
     public void PreviousQuestion()
@@ -82,6 +96,12 @@ public class Quiz : MonoBehaviour
         {
             m_QuizIdx--;
             DisplayQuestion(m_QuizIdx);
+        }
+        // show submit button if is last question
+        m_SubmitButton.SetActive(false);
+        if (m_QuizIdx + 1 == m_QuizQuestions.Length)
+        {
+            m_SubmitButton.SetActive(true);
         }
     }
 
@@ -95,6 +115,28 @@ public class Quiz : MonoBehaviour
         m_TextAnswer[2].text = q.Answer3;
         m_TextAnswer[3].text = q.Answer4;
         m_TextId.text = (i+1) + "/" + m_QuizQuestions.Length;
+    }
+
+    /// <summary>
+    /// Called when submit button is clicked
+    /// </summary>
+    public void SubmitResult()
+    {
+        // show result screen
+        m_ResultScreen.SetActive(true);
+        // display score
+        int correct = 0;
+        for (int i = 0; i < m_StudentAnsBool.Length; i++)
+        {
+            if (m_StudentAnsBool[i]) correct++;
+        }
+
+        m_TextScore.text = correct + "/" + m_StudentAnsBool.Length;
+        // the score in float
+        float scoref = (float)correct / m_StudentAnsBool.Length;
+        
+        // hide quiz screen
+        m_QuizScreen.SetActive(false);
     }
     
 }
