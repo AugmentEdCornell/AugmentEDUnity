@@ -77,7 +77,7 @@ public class Quiz : MonoBehaviour
 
     public void NextQuestion()
     {
-        if (m_QuizIdx + 1 <= m_QuizQuestions.Length)
+        if (m_QuizIdx + 1 < m_QuizQuestions.Length)
         {
             m_QuizIdx++;
             DisplayQuestion(m_QuizIdx);
@@ -86,6 +86,7 @@ public class Quiz : MonoBehaviour
         m_SubmitButton.SetActive(false);
         if (m_QuizIdx + 1 == m_QuizQuestions.Length)
         {
+            DisplayQuestion(m_QuizIdx);
             m_SubmitButton.SetActive(true);
         }
     }
@@ -132,6 +133,11 @@ public class Quiz : MonoBehaviour
         }
 
         m_TextScore.text = correct + "/" + m_StudentAnsBool.Length;
+        
+        // send email
+        //Email email = GetComponent<Email>();
+        //email.SendEmail("The score is " + m_TextScore.text);
+        
         // the score in float
         float scoref = (float)correct / m_StudentAnsBool.Length;
         

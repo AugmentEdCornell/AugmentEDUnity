@@ -101,11 +101,15 @@ public class AWS_Connect : MonoBehaviour
         var request = new RestRequest(Method.POST);
         request.AddHeader("Content-Type", "application/json");
         request.AddJsonBody(data);
-
         yield return client.ExecuteAsync(request, response =>
         {
+            Debug.Log("client request");
+            Debug.Log(client);
+            Debug.Log(request);
+            Debug.Log(response.StatusCode);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
+                Debug.Log(007);
                 Debug.LogError(response.ErrorMessage);
             }
             else

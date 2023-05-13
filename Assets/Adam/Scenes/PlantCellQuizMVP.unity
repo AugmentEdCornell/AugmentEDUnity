@@ -13352,6 +13352,7 @@ GameObject:
   - component: {fileID: 1597693473}
   - component: {fileID: 1597693474}
   - component: {fileID: 1597693472}
+  - component: {fileID: 1597693475}
   m_Layer: 0
   m_Name: QuizController
   m_TagString: Untagged
@@ -13444,6 +13445,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6948dd52951c4b4c9a8f5b5a1430954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1597693475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597693471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227fa582aba6e2c4ea02118574400ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1598548125
