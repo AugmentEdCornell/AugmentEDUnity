@@ -100,7 +100,7 @@ public class Outline : MonoBehaviour {
   }
 
   void OnEnable() {
-    Debug.Log("OnEnabledCalled");
+    //Debug.Log("OnEnabledCalled");
     foreach (var renderer in renderers) {
 
       // Append outline shaders

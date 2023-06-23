@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Adam/Scenes/ScanTestScene.unity
     guid: f1b3c480e9bf8a04bbdc84db8dab7cc0
+  - enabled: 0
+    path: Assets/Adam/Scenes/GPTTestScene.unity
+    guid: e49fd7e9c265e1b43840c159bd712a82
+  - enabled: 0
+    path: Assets/Adam/Experiments/GPTTestScene2.unity
+    guid: 57af4b47b209e60428e9ff4efa7eb37f
   m_configObjects: {}

@@ -21,6 +21,11 @@ public class Button2Model : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         
     }
 
+    public void ButtonOnClick()
+    {
+        m_Model.OnClick();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         m_Model.OnHover();
