@@ -20,7 +20,7 @@ namespace OpenAI
         //[SerializeField] private RectTransform received;
 
         //private float height;
-        private OpenAIApi openai = new OpenAIApi("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");
+        private OpenAIApi openai = new OpenAIApi("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");
 
         private List<ChatMessage> messages = new List<ChatMessage>();
         private string prompt = 
